@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AbiturientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,13 @@ Route::get('/', function () {
 
 Route::prefix('/dashboard')->name('dashboard.')->middleware(['auth', 'verified'])->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('panel');
-    //  return view('dashboard');
-});
 
+});
+Route::prefix('/admin713')->name('admin.')->middleware(['auth', 'verified'])->group(function(){
+    Route::get('/', [AdminController::class, 'index'])->name('adminPanel');
+    Route::get('/biturients', [AbiturientController::class, 'index'])->name('abiturients');
+
+});
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
